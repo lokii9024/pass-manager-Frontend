@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
+import { useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -13,6 +13,8 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { signUpUser } from "@/lib/ctb"
+import { th } from "zod/v4/locales"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -36,8 +38,23 @@ export function SignUp() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+  const navigate = useNavigate()
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    // Here you would typically call your sign-up API
+    // For example:
+    // signUpUser(values)
+    console.log("Form submitted with values:", values)
+    try {
+      await signUpUser({...values})
+      form.reset()
+      navigate("/home") // Redirect to home page after successful sign-up
+    } catch (error) {
+      // Handle error appropriately
+      console.error("Error during sign-up:", error)
+      // You might want to show an error message to the user
+      throw new Error("Sign-up failed. Please try again.")
+    }
   }
 
   return (

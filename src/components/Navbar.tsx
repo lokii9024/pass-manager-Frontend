@@ -4,15 +4,17 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Lock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "@/store/authStore";
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const {User} = useAuthStore()
 
   useEffect(() => {
     // Replace this with real login state (e.g., token check)
-    
-  }, []);
+    setIsLoggedIn(User? true : false)
+  }, [User]);
 
   return (
     <nav className="w-full flex items-center justify-between px-6 py-4 border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-50">
