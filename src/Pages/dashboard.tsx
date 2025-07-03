@@ -1,9 +1,5 @@
-import { useParams } from 'react-router-dom'
-import { useAuthStore } from '@/store/authStore'
-
+import React from 'react';
 const Dashboard = () => {
-    const { slug } = useParams<{ slug: string }>();
-    const { User } = useAuthStore();
     return (
         <div>dashboard</div>
     )

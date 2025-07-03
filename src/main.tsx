@@ -16,8 +16,12 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/",
+        path: "/home",
         element: <Hero />
+      },
+      {
+        path: "/",
+        element: <Hero/>
       },
       {
         path: "howItWorks",
@@ -32,7 +36,7 @@ const router = createBrowserRouter([
         element: <SignUp />
       },
       {
-        path: "/dashboard/:slug",
+        path: "dashboard/:slug",
         element: (
           <AuthLayout>
             <Dashboard/>

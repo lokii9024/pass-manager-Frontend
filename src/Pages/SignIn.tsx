@@ -13,6 +13,9 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useAuthStore } from "@/store/authStore"
+import { signInUser } from "@/lib/ctb"
+import { useNavigate } from "react-router-dom"
 
 const formSchema = z.object({
   email: z.string().min(2, {
@@ -32,8 +35,19 @@ export function SignIn() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const navigate = useNavigate()
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
+
+    try {
+      await signInUser({...values})
+      form.reset()
+      console.log("navigating to home, user logged in successfully")
+      navigate("/home")
+    } catch (error) {
+      console.log("error", error)
+      //show toast
+    }
   }
 
   return (
@@ -58,12 +72,12 @@ export function SignIn() {
             />
             <FormField
               control={form.control}
-              name="email"
+              name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your password" {...field} />
+                    <Input placeholder="Enter your password" {...field} type="password"/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

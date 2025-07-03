@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { signUpUser } from "@/lib/ctb"
-import { th } from "zod/v4/locales"
+import { useAuthStore } from "@/store/authStore"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -52,8 +52,7 @@ export function SignUp() {
     } catch (error) {
       // Handle error appropriately
       console.error("Error during sign-up:", error)
-      // You might want to show an error message to the user
-      throw new Error("Sign-up failed. Please try again.")
+      //show toast
     }
   }
 
