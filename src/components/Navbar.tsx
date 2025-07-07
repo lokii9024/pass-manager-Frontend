@@ -8,7 +8,7 @@ import { useAuthStore } from "@/store/authStore";
 import { logOutUser } from "@/lib/ctb";
 
 export default function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const User = useAuthStore((state) => state.User)
 

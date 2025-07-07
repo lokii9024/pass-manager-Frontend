@@ -1,8 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useAuthStore } from "@/store/authStore";
 import { ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
+  const navigate = useNavigate()
+  const {User} = useAuthStore()
+  const [isLoggedIn,setIsLoggedIn] = useState(false)
+
+  useEffect( () => {
+    setIsLoggedIn(!!User)
+  },[User])
+
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <header className="text-center max-w-2xl mx-auto mt-24 px-4">
@@ -12,7 +23,7 @@ export default function LandingPage() {
         <p className="text-lg md:text-xl text-muted-foreground mb-6">
           A sleek, private, and encrypted password manager. Powered by modern encryption. You control your data.
         </p>
-        <Button size="lg">
+        <Button size="lg" onClick={isLoggedIn ? () => navigate(`/dashboard/${User?._id}`) : () => navigate("/signin")} className="bg-primary text-primary-foreground hover:bg-primary/90">
           Get Started <ArrowRight className="ml-2 w-4 h-4" />
         </Button>
       </header>
