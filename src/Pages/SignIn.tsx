@@ -16,6 +16,24 @@ import { Input } from "@/components/ui/input"
 import { useAuthStore } from "@/store/authStore"
 import { signInUser } from "@/lib/ctb"
 import { useNavigate } from "react-router-dom"
+import toastr from "toastr"
+import 'toastr/build/toastr.min.css';
+
+toastr.options = {
+  closeButton: true,
+  timeOut: 2500,
+  extendedTimeOut: 1000,
+  progressBar: true,
+  positionClass: 'toast-bottom-right',
+  newestOnTop: true,
+  showEasing: 'swing',   // ✅ valid easing
+  hideEasing: 'swing',   // ✅ valid easing
+  showMethod: 'fadeIn',
+  hideMethod: 'fadeOut',
+  toastClass: 'bg-card text-foreground shadow-lg border border-border rounded-xl p-4 font-medium',
+  titleClass: 'text-lg font-semibold',
+  messageClass: 'text-sm',
+}
 
 const formSchema = z.object({
   email: z.string().min(2, {
@@ -44,6 +62,7 @@ export function SignIn() {
       form.reset()
       console.log("navigating to home, user logged in successfully")
       navigate("/home")
+      toastr.success("User signed in successfully!","Success")
     } catch (error) {
       console.log("error", error)
       //show toast

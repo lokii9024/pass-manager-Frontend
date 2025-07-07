@@ -15,6 +15,24 @@ import {
 import { Input } from "@/components/ui/input"
 import { signUpUser } from "@/lib/ctb"
 import { useAuthStore } from "@/store/authStore"
+import toastr from "toastr"
+import 'toastr/build/toastr.min.css';
+
+toastr.options = {
+  closeButton: true,
+  timeOut: 2500,
+  extendedTimeOut: 1000,
+  progressBar: true,
+  positionClass: 'toast-bottom-right',
+  newestOnTop: true,
+  showEasing: 'swing',   // ✅ valid easing
+  hideEasing: 'swing',   // ✅ valid easing
+  showMethod: 'fadeIn',
+  hideMethod: 'fadeOut',
+  toastClass: 'bg-card text-foreground shadow-lg border border-border rounded-xl p-4 font-medium',
+  titleClass: 'text-lg font-semibold',
+  messageClass: 'text-sm',
+}
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -49,6 +67,7 @@ export function SignUp() {
       await signUpUser({...values})
       form.reset()
       navigate("/home") // Redirect to home page after successful sign-up
+      toastr.success("User created successfully!","Success")
     } catch (error) {
       // Handle error appropriately
       console.error("Error during sign-up:", error)

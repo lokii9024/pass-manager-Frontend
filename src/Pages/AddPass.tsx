@@ -21,7 +21,27 @@ import {
 } from "@/components/ui/collapsible";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { encryptPass } from "@/lib/encryption";
-import { addPass } from "@/lib/ctb";
+import { addPass, getAllPasses } from "@/lib/ctb";
+import toastr from "toastr"
+import 'toastr/build/toastr.min.css';
+
+toastr.options = {
+  closeButton: true,
+  timeOut: 2500,
+  extendedTimeOut: 1000,
+  progressBar: true,
+  positionClass: 'toast-bottom-right',
+  newestOnTop: true,
+  showEasing: 'swing',   // ✅ valid easing
+  hideEasing: 'swing',   // ✅ valid easing
+  showMethod: 'fadeIn',
+  hideMethod: 'fadeOut',
+  toastClass: 'bg-card text-foreground shadow-lg border border-border rounded-xl p-4 font-medium',
+  titleClass: 'text-lg font-semibold',
+  messageClass: 'text-sm',
+}
+
+
 
 const formSchema = z.object({
   url: z.string().min(2, {
@@ -63,9 +83,12 @@ const AddPass = () => {
       });
 
       console.log("Password added successfully:", newPass);
+      getAllPasses();
+      toastr.success("Password added successfully!","Success")
       form.reset(); // Reset the form after successful submission
     } catch (error) {
       console.error("Error adding password:", error);
+      toastr.error("Error while adding password!","Error")
     }
   };
 
