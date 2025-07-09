@@ -11,7 +11,9 @@ interface Pass {
 
 interface PassStore {
     passes: Pass[];
+    loading: boolean;
     setPasses: (passes: Pass[]) => void;
+    setLoading: (loading: boolean) => void;
     addPass: (pass: Pass) => void;
     removePass: (id: string) => void;
     updatePass: (id: string, updatedPass: Partial<Pass>) => void;
@@ -19,7 +21,9 @@ interface PassStore {
 
 export const usePassStore = create<PassStore>((set) => ({
     passes: [],
+    loading: true,
     setPasses: (passes) => set({ passes }),
+    setLoading : (loading) => set({loading}),
     addPass: (pass) => set((state) => ({
         passes: [...state.passes,pass]
     })),

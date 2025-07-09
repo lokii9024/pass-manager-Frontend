@@ -83,7 +83,6 @@ const AddPass = () => {
       });
 
       console.log("Password added successfully:", newPass);
-      getAllPasses();
       toastr.success("Password added successfully!","Success")
       form.reset(); // Reset the form after successful submission
     } catch (error) {

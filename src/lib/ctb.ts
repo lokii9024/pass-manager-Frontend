@@ -122,7 +122,7 @@ type passProps = {
 }
 
 export const getAllPasses = async () => {
-  const {setPasses} = usePassStore.getState()
+  console.log("calling to backend to get all entries")
   try {
     const res = await axios.get(`${API_BASE_URL}/passes/get-passes`, {
       withCredentials: true,
@@ -132,7 +132,8 @@ export const getAllPasses = async () => {
     })
 
     const passes = res.data.passes;
-    setPasses(passes)
+    console.log(passes)
+    return passes
   } catch (error) {
     console.log("error while fetching passes", error);
     throw new Error("Failed to fetch passes");
