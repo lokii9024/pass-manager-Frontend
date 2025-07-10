@@ -24,6 +24,7 @@ import { encryptPass } from "@/lib/encryption";
 import { addPass, getAllPasses } from "@/lib/ctb";
 import toastr from "toastr"
 import 'toastr/build/toastr.min.css';
+import { useNavigate } from "react-router-dom";
 
 toastr.options = {
   closeButton: true,
@@ -69,6 +70,7 @@ const AddPass = () => {
     },
   });
 
+  const navigate = useNavigate()
   const [open, setOpen] = React.useState(false);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -85,6 +87,7 @@ const AddPass = () => {
       console.log("Password added successfully:", newPass);
       toastr.success("Password added successfully!","Success")
       form.reset(); // Reset the form after successful submission
+      navigate(-1)
     } catch (error) {
       console.error("Error adding password:", error);
       toastr.error("Error while adding password!","Error")

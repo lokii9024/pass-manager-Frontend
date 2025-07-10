@@ -4,8 +4,8 @@ import { Eye } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useParams, useNavigate } from "react-router-dom";
 import { usePassStore } from "@/store/passStore";
-import { useEffect,useState } from "react";
-import { getAllPasses, removePass } from "@/lib/ctb";
+import { useEffect, useState } from "react";
+import {  removePass } from "@/lib/ctb";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
 import { usePassesInit } from "@/hooks/usePassesInit";
@@ -194,13 +194,29 @@ const Dashboard = () => {
                         </div>
                       </td>
                       <td className="px-4 py-2 text-center space-x-2">
-                        <Button variant="secondary" size="sm">
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          onClick={() =>
+                            navigate(
+                              `/dashboard/${slug}/update-pass/${entry._id}`
+                            )
+                          }
+                        >
                           Edit
                         </Button>
                         <Button
                           variant="destructive"
                           size="sm"
-                          onClick={() => handleDelete(entry._id)}
+                          onClick={() => {
+                            if (
+                              confirm(
+                                "Are you sure you want to delete this password?"
+                              )
+                            ) {
+                              handleDelete(entry._id);
+                            }
+                          }}
                         >
                           Delete
                         </Button>

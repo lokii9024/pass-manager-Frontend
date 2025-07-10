@@ -185,7 +185,7 @@ export const removePass = async (id: string) => {
   }
 }
 
-export const updatePass = async ({url,username,pass,IV,id}: passProps & {id: string}) => {
+export const EditPassEntry  = async ({url,username,pass,IV,id}: passProps & {id: string}) => {
   const {updatePass} = usePassStore.getState()
   try {
     const res = await axios.post(`${API_BASE_URL}/passes/update-pass/${id}`,
@@ -200,8 +200,6 @@ export const updatePass = async ({url,username,pass,IV,id}: passProps & {id: str
       }
     )
     console.log("pass updated successfully");
-    const updatedPass = res.data.updatedPass
-    updatePass(id,updatedPass)
     return res.data.updatedPass
   } catch (error) {
     console.log("error while updating pass", error);
