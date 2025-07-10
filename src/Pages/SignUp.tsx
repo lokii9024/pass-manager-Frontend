@@ -68,10 +68,21 @@ export function SignUp() {
       form.reset()
       navigate("/home") // Redirect to home page after successful sign-up
       toastr.success("User created successfully!","Success")
-    } catch (error) {
+    } catch (error:any) {
       // Handle error appropriately
       console.error("Error during sign-up:", error)
       //show toast
+      switch (error.status) {
+        case 400:
+          toastr.error("User already exist, Please sign in !!","Error")
+          break;
+        
+        case 500:
+            toastr.error("Internal server error","Error")
+            break
+        default:
+          toastr.error("Sign Up failed","Unexpected Error")
+      }
     }
   }
 

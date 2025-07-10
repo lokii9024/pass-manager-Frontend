@@ -38,7 +38,7 @@ export const signUpUser = async ({ name, email, password }: signUpProps) => {
 
   } catch (error: any) {
     const message = error.response?.data?.message || "Signup failed";
-    throw new Error(message);
+    throw {message,status: error.response?.status}
   }
 };
 
@@ -63,7 +63,7 @@ export const signInUser = async ({email, password} : signInProps) => {
 
   } catch (error: any) {
     const message = error.response?.data?.message || "Signin failed";
-    throw new Error(message);
+    throw {message, status: error.response?.status}
   }
 }
 

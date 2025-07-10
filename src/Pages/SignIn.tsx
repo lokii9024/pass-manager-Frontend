@@ -63,9 +63,24 @@ export function SignIn() {
       console.log("navigating to home, user logged in successfully")
       navigate("/home")
       toastr.success("User signed in successfully!","Success")
-    } catch (error) {
+    } catch (error:any) {
       console.log("error", error)
-      //show toast
+      switch (error.status) {
+        case 400:
+          toastr.error("Invalid Password","Error")
+          break;
+        
+        case 404:
+          toastr.error("User does not exist","Error")
+          break
+        
+        case 500:
+          toastr.error("Internal server error","Error")
+          break
+
+        default:
+          toastr.error("Signin failed", "Unexpected Error");
+      }
     }
   }
 
