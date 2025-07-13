@@ -186,7 +186,6 @@ export const removePass = async (id: string) => {
 }
 
 export const EditPassEntry  = async ({url,username,pass,IV,id}: passProps & {id: string}) => {
-  const {updatePass} = usePassStore.getState()
   try {
     const res = await axios.post(`${API_BASE_URL}/passes/update-pass/${id}`,
       {

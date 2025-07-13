@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useParams, useNavigate } from "react-router-dom";
 import { usePassStore } from "@/store/passStore";
 import { useEffect, useState } from "react";
-import {  removePass } from "@/lib/ctb";
+import { removePass } from "@/lib/ctb";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
 import { usePassesInit } from "@/hooks/usePassesInit";
@@ -23,10 +23,10 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import type { Pass } from "../store/passStore";
 
 toastr.options = {
   closeButton: true,
@@ -50,10 +50,9 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
   const { passes } = usePassStore.getState();
-  const { loading } = usePassStore.getState();
 
   const [showDialog, setShowDialog] = useState(false);
-  const [selectedEntry, setSelectedEntry] = useState(null);
+  const [selectedEntry, setSelectedEntry] = useState<Pass | null>(null);
   const [masterPassInput, setMasterPassInput] = useState("");
   const [revealedPass, setRevealedPass] = useState("");
   const [error, setError] = useState("");
@@ -81,6 +80,10 @@ const Dashboard = () => {
   };
 
   const handleVerify = () => {
+    if (!selectedEntry) {
+      setError("No entry selected.");
+      return;
+    }
     try {
       const decrypted = decryptPass(
         selectedEntry.pass,

@@ -1,6 +1,6 @@
 import {create} from 'zustand'
 
-interface Pass {
+export interface Pass {
     _id: string;
     url: string;
     username: string;

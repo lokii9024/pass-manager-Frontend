@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,7 +13,6 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { signUpUser } from "@/lib/ctb"
-import { useAuthStore } from "@/store/authStore"
 import toastr from "toastr"
 import 'toastr/build/toastr.min.css';
 

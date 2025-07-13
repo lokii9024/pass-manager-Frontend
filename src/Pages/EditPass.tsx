@@ -83,10 +83,10 @@ export default function EditPass() {
         username: values.username,
         pass: encrypted,
         IV: IV,
-        id: id
+        id: id ?? ""
       })
 
-      updatePass(id,updatedPass)
+      updatePass(id ?? "",updatedPass)
       toastr.success("Password updated successfully!", "Success");
       navigate(-1); // Go back to dashboard
     } catch (error) {

@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/collapsible";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { encryptPass } from "@/lib/encryption";
-import { addPass, getAllPasses } from "@/lib/ctb";
+import { addPass } from "@/lib/ctb";
 import toastr from "toastr"
 import 'toastr/build/toastr.min.css';
 import { useNavigate } from "react-router-dom";
